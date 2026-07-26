@@ -1,0 +1,33 @@
+# Офисные документы
+*.docx
+*.pdf
+*.xlsx
+*.pptx
+*.odt
+
+# Картинки и прочие медиа
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.jfif
+
+# Архивы
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# Установщики
+*.exe
+*.msi
+
+# Блокировочные файлы LibreOffice/Word
+.*lock.*
+
+# Папки игр, загрузок и прочего
+/MediaGet Downloads/
+/No, I'm not a Human (2025)/
+/Batman*/
+/Phasmophobia*/

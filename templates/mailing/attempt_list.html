@@ -1,0 +1,57 @@
+
+{% extends 'base.html' %}
+{% block title %}Попытки рассылок{% endblock %}
+{% block content %}
+<h1>Попытки рассылок</h1>
+{% if attempts %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID Попытки</th>
+                <th>Дата/Время</th>
+                <th>Статус</th>
+                <th>ID Рассылки</th>
+                <th>Ответ сервера</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attempt in attempts %}
+                <tr>
+                    <td>{{ attempt.id }}</td>
+                    <td>{{ attempt.attempt_time }}</td>
+                    <td>
+                        {% if attempt.status == 'success' %}
+                            <span class="badge bg-success">Успешно</span>
+                        {% else %}
+                            <span class="badge bg-danger">Не успешно</span>
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'mailing:mailing_detail' attempt.mailing.pk %}">{{ attempt.mailing.id }}</a></td>
+                    <td>{{ attempt.server_response|truncatechars:50 }}</td> <!-- Обрезаем длинный ответ -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+     {% if is_paginated %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">Первая</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a></li>
+                {% endif %}
+
+                <li class="page-item active"><span class="page-link">{{ page_obj.number }}</span></li>
+
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+{% else %}
+    <p>Попытки не найдены.</p>
+<form method="post">
+    {% csrf_token %}
+{% endif %}
+{% endblock %}

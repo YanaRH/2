@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Сообщения{% endblock %}
+{% block content %}
+<h1>Список сообщений</h1>
+<a href="{% url 'mailing:message_create' %}" class="btn btn-primary mb-3">Добавить сообщение</a>
+{% if messages %}
+    <ul class="list-group">
+        {% for message in messages %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'mailing:message_detail' message.pk %}">{{ message.subject }}</a>
+                <div>
+                    <a href="{% url 'mailing:message_update' message.pk %}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                    <a href="{% url 'mailing:message_delete' message.pk %}" class="btn btn-sm btn-outline-danger">Удалить</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Сообщения не найдены.</p>
+{% endif %}
+{% endblock %}

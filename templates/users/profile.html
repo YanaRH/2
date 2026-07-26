@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Профиль{% endblock %}
+{% block content %}
+<h2>Профиль пользователя {{ user.username }}</h2>
+<form method="post" enctype="multipart/form-data"> <!-- enctype для файлов -->
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Обновить профиль</button>
+</form>
+<a href="{% url 'users:logout' %}" class="btn btn-secondary">Выйти</a>
+{% endblock %}

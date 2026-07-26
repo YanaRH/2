@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Подтверждение отправки рассылки{% endblock %}
+
+{% block content %}
+<h1>Подтверждение отправки рассылки</h1>
+
+<p>Вы собираетесь отправить рассылку: <strong>{{ mailing.subject|default:"Без темы" }}</strong></p>
+<p><small>Получатели: {{ mailing.recipients.count }} человек.</small></p>
+
+<!-- Форма с CSRF-токеном обязательно должна быть здесь -->
+<form method="post">
+    {% csrf_token %}
+
+    <p>Рассылка будет отправлена только в интервале времени (сейчас проверяется автоматически).</p>
+
+    <button type="submit" class="btn btn-primary">Да, отправить</button>
+    <a href="{% url 'mailing:mailing_detail' pk=mailing.pk %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}

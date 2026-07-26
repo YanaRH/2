@@ -1,0 +1,27 @@
+<h1>Список рассылок</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Тема</th>
+            <th>Статус</th>
+            <th>Получателей</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mailing in mailings %}
+        <tr>
+            <td>{{ mailing.subject }}</td>
+            <td>{{ mailing.status }}</td>
+            <td>{{ mailing.clients.count }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Пока нет рассылок</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<hr>
+<a href="/">Вернуться на главную</a>

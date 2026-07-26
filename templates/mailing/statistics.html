@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Статистика рассылок{% endblock %}
+{% block content %}
+<h1>Статистика ваших рассылок</h1>
+{% if mailings %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID Рассылки</th>
+                <th>Тема сообщения</th>
+                <th>Всего попыток</th>
+                <th>Успешных</th>
+                <th>Неуспешных</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mailing in mailings %}
+                <tr>
+                    <td>{{ mailing.id }}</td>
+                    <td>{{ mailing.message.subject }}</td>
+                    <td>{{ mailing.total_attempts }}</td>
+                    <td>{{ mailing.successful_attempts }}</td>
+                    <td>{{ mailing.failed_attempts }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>У вас пока нет рассылок.</p>
+{% endif %}
+{% endblock %}

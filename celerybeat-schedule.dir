@@ -1,0 +1,5 @@
+pip install django djangorestframework django-crispy-forms crispy-bootstrap5 django-allauth redis django-redis
+'entries', (0, 342)
+'__version__', (512, 20)
+'tz', (1024, 28)
+'utc_enabled', (1536, 4)
